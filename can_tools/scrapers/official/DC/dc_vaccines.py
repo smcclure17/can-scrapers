@@ -12,7 +12,7 @@ class DCVaccineRace(TableauDashboard):
     state_fips = int(us.states.lookup("District of Columbia").fips)
     location_type = "state"
     baseurl = "https://dataviz1.dc.gov/t/OCTO"
-    viewPath = "Vaccine_Public/Demographics"
+    viewPath = "Vaccine_Public/Demographics/get_customized_views/sessions/BAD06E44484F4AD2BCD4CE4E3BC3BDA0-3:1"
 
     data_tableau_table = "Demographics "
 
@@ -34,24 +34,9 @@ class DCVaccineRace(TableauDashboard):
         return pd.to_datetime(df.iloc[0]["MaxDate-alias"]).date()
 
     def normalize(self, data):
-        df = (
-            data.rename(
-                columns={
-                    "Vaccination Status-alias": "variable",
-                    "SUM(Vaccinated)-value": "value",
-                }
-            )
-            .assign(
-                vintage=self._retrieve_vintage(),
-                dt=self._get_date(),
-                location=self.state_fips,
-            )
-            .drop(
-                columns={
-                    "SUM(Vaccinated)-alias",
-                    "Cross-alias",
-                }
-            )
+        df = (data.rename(columns={"Vaccination Status-alias": "variable", "SUM(Vaccinated)-value": "value",})
+            .assign(vintage=self._retrieve_vintage(), dt=self._get_date(), location=self.state_fips,)
+            .drop(columns={"SUM(Vaccinated)-alias","Cross-alias",})
         )
 
         # already in long form yay

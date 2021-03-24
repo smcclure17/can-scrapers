@@ -20,7 +20,15 @@ from can_tools.scrapers.official.CT import (
     CTCountyVaccine,
 )
 
-from can_tools.scrapers.official.DC import DCCases, DCGeneral, DCDeaths, DCVaccineSex
+from can_tools.scrapers.official.DC import (
+    DCCases,
+    DCGeneral,
+    DCDeaths,
+    DCVaccineSex,
+    DCVaccineRace,
+    DCVaccineEthnicity,
+    DCVaccineAge,
+)
 
 from can_tools.scrapers.official.DE import (
     DelawareData,
